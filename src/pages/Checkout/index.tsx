@@ -1,88 +1,150 @@
+import {
+	Bank,
+	CreditCard,
+	CurrencyDollar,
+	MapPinLine,
+	Money,
+	Trash,
+} from "phosphor-react";
+import { useTheme } from "styled-components";
 import { Input } from "../../components/Input";
 import { Header } from "../../components/Header";
-import {
-  CardBox,
-  Container,
-  ContainerScreen,
-  Main,
-  MapIcon,
-  Subtitle,
-  Title,
-  Col,
-} from "./styles";
+import { Button } from "../../components/Button";
 import { Row } from "../../components/Row";
-import { MapPinLine } from "phosphor-react";
+import {
+	CardBox,
+	Container,
+	ContainerScreen,
+	Main,
+	MapIcon,
+	Title,
+	Col,
+	ComplementInput,
+	HeaderTitle,
+	HeaderContainer,
+	HeaderSubtitle,
+	PaymentButtons,
+	HeaderBox,
+	Image,
+	ItemsList,
+	ActionsItem,
+} from "./styles";
+import { InputNumberWithButton } from "../../components/InputNumberWithButton";
+import TypeExpresso from "../../assets/img/TypeExpresso.svg";
+
+interface ColorsTheme {
+	purple: string;
+}
 
 export function Checkout() {
-  return (
-    <>
-      <Header />
-      <Container>
-        <ContainerScreen>
-          <Main>
-            <Title>Complete seu pedido</Title>
-            <CardBox>
-              <Row>
-                <MapIcon>
-                  <MapPinLine size={22} />
-                </MapIcon>
-                <Subtitle>Endereço de entrega</Subtitle>
-              </Row>
-              <Row>
-                <Col size={1}>
-                  <span>Informe o endereco onde deseja receber seu pedido</span>
-                </Col>
-              </Row>
-              <Row>
-                <Input type="text" placeholder="CEP" size={11} />
-              </Row>
-              <Row>
-                <Input type="text" placeholder="Rua" />
-              </Row>
-              <Row>
-                <Input type="text" placeholder="Numero" size={20} />
-                <Input type="text" placeholder="Complemento" />
-              </Row>
-              <Row>
-                <Input type="text" placeholder="Bairro" size={25} />
-                <Input type="text" placeholder="Cidade" />
-                <Input type="text" placeholder="UF" size={3.75} />
-              </Row>
-            </CardBox>
+	const theme = useTheme() as ColorsTheme;
+	return (
+		<>
+			<Header />
+			<Container>
+				<ContainerScreen>
+					<Main>
+						<Title>Complete seu pedido</Title>
+						<CardBox>
+							<HeaderBox>
+								<HeaderContainer>
+									<MapIcon>
+										<MapPinLine size={22} />
+									</MapIcon>
+									<Col gutter={1}>
+										<HeaderTitle>Endereço de entrega</HeaderTitle>
+									</Col>
+								</HeaderContainer>
+								<Row>
+									<Col gutter={4}>
+										<HeaderSubtitle>
+											Informe o endereco onde deseja receber seu pedido
+										</HeaderSubtitle>
+									</Col>
+								</Row>
+							</HeaderBox>
+							<Row>
+								<Input type="text" placeholder="CEP" size={11} />
+							</Row>
+							<Row>
+								<Input type="text" placeholder="Rua" />
+							</Row>
+							<Row>
+								<Input type="text" placeholder="Número" size={15} />
+								<ComplementInput
+									type="text"
+									placeholder="Complemento                                             opcional"
+								/>
+							</Row>
+							<Row>
+								<Input type="text" placeholder="Bairro" size={20} />
+								<Input type="text" placeholder="Cidade" />
+								<Input type="text" placeholder="UF" size={3.75} />
+							</Row>
+						</CardBox>
 
-            <CardBox>
-              <h4>Pagamento</h4>
-              <p>
-                O pagamento e feito na entrega. Escolha a forma que deseja pagar
-              </p>
-
-              <div>
-                <button>Cartao de credito</button>
-                <button>Cartao de debito</button>
-                <button>Dinheiro</button>
-              </div>
-            </CardBox>
-          </Main>
-          <div>
-            <Title>Cafes selecionados</Title>
-            <CardBox>
-              <div>
-                <ul>
-                  <li>Expresso tradicional</li>
-                  <li>Latte</li>
-                </ul>
-                <hr />
-                <p>Total de itens: </p> <span>R$20,00</span>
-                <p>Entrega: </p>
-                <span>R$20,00</span>
-                <h4>Total: </h4>
-                <span>R$20,00</span>
-                <button type="submit">Confirmar pedido</button>
-              </div>
-            </CardBox>
-          </div>
-        </ContainerScreen>
-      </Container>
-    </>
-  );
+						<CardBox>
+							<HeaderBox>
+								<HeaderContainer>
+									<CurrencyDollar color={theme["purple"]} size={22} />
+									<Col gutter={1}>
+										<HeaderTitle>Pagamento</HeaderTitle>
+									</Col>
+								</HeaderContainer>
+								<Row>
+									<Col gutter={3.6}>
+										<HeaderSubtitle>
+											O pagamento é feito na entrega. Escolha a forma que deseja
+											pagar
+										</HeaderSubtitle>
+									</Col>
+								</Row>
+							</HeaderBox>
+							<PaymentButtons>
+								<Button>
+									<CreditCard size={16} color={theme.purple} />
+									Cartão de crédito
+								</Button>
+								<Button>
+									<Bank size={16} color={theme.purple} />
+									Cartão de débito
+								</Button>
+								<Button>
+									<Money size={16} color={theme.purple} />
+									Dinheiro
+								</Button>
+							</PaymentButtons>
+						</CardBox>
+					</Main>
+					<div>
+						<Title>Cafés selecionados</Title>
+						<CardBox>
+							<ItemsList>
+								<li>
+									<Image src={TypeExpresso} />
+									<div>
+										Expresso tradicional
+										<ActionsItem>
+											<InputNumberWithButton number={1} setNumber={() => {}} />
+											<Button size="small">
+												<Trash color={theme.purple} /> Remover
+											</Button>
+										</ActionsItem>
+									</div>
+								</li>
+								<li>Latte</li>
+							</ItemsList>
+							<hr />
+							<p>Total de itens: </p> <span>R$20,00</span>
+							<p>Entrega: </p>
+							<span>R$20,00</span>
+							<h4>Total: </h4>
+							<span>R$20,00</span>
+							<button type="submit">Confirmar pedido</button>
+						</CardBox>
+					</div>
+				</ContainerScreen>
+			</Container>
+		</>
+	);
 }

@@ -6,17 +6,17 @@ import { Home } from "./pages/Home";
 import { Checkout } from "./pages/Checkout";
 
 function App() {
-  return (
-    <>
-      <ThemeProvider theme={defaultTheme}>
-        <CartContextProvider>
-          <Checkout />
-          {/* <Home /> */}
-        </CartContextProvider>
-        <GlobalStyle />
-      </ThemeProvider>
-    </>
-  );
+	return (
+		<>
+			<ThemeProvider theme={defaultTheme}>
+				<CartContextProvider>
+					<Checkout />
+					{/* <Home /> */}
+				</CartContextProvider>
+				<GlobalStyle />
+			</ThemeProvider>
+		</>
+	);
 }
 
 export default App;
