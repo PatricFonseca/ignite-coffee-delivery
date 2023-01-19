@@ -9,12 +9,10 @@ interface ISizes {
 
 const spanSizes = {
 	small: css`
-		padding: 0.41rem 0.5rem;
-		/* font-size: 0.95rem; */
+		padding: 0.29rem 0.2rem;
 	`,
 	medium: css`
 		padding: 0.56rem;
-		/* font-size: 1.1rem; */
 	`,
 };
 
@@ -28,9 +26,9 @@ export const InputNumber = styled.span<{ size: keyof ISizes }>`
 	/* width: 1.5rem; */
 `;
 
-const sizes = {
+const buttonsSizes = {
 	small: css`
-		padding: 0.49rem 0.5rem;
+		padding: 0.36rem 0.3rem;
 	`,
 
 	medium: css`
@@ -40,8 +38,9 @@ const sizes = {
 
 export const ButtonSpinEdit = styled.button<{ size: keyof ISizes }>`
 	background-color: #e6e5e5;
+
 	/* padding: 0.6rem 0.5rem; */
-	${({ size }) => sizes[size]}
+	${({ size }) => buttonsSizes[size]}
 
 	span {
 		/* font-size: 1rem; */

@@ -28,9 +28,18 @@ import {
 	Image,
 	ItemsList,
 	ActionsItem,
+	Box,
+	RightCardBox,
+	ItemPrice,
+	Item,
+	TotalCard,
+	TotalPrice,
+	TotalCardRow,
+	ConfirmButton,
 } from "./styles";
 import { InputNumberWithButton } from "../../components/InputNumberWithButton";
 import TypeExpresso from "../../assets/img/TypeExpresso.svg";
+import TypeLatte from "../../assets/img/TypeLatte.svg";
 
 interface ColorsTheme {
 	purple: string;
@@ -118,30 +127,52 @@ export function Checkout() {
 					</Main>
 					<div>
 						<Title>Cafés selecionados</Title>
-						<CardBox>
+						<RightCardBox>
 							<ItemsList>
-								<li>
+								<Item>
 									<Image src={TypeExpresso} />
-									<div>
-										Expresso tradicional
+									<Box>
+										<p>Expresso tradicional</p>
 										<ActionsItem>
 											<InputNumberWithButton number={1} setNumber={() => {}} />
 											<Button size="small">
 												<Trash color={theme.purple} /> Remover
 											</Button>
 										</ActionsItem>
-									</div>
-								</li>
-								<li>Latte</li>
+									</Box>
+									<ItemPrice>R$ 19,88</ItemPrice>
+								</Item>
+								<Item>
+									<Image src={TypeLatte} />
+									<Box>
+										<p>Expresso tradicional</p>
+										<ActionsItem>
+											<InputNumberWithButton number={1} setNumber={() => {}} />
+											<Button size="small">
+												<Trash color={theme.purple} /> Remover
+											</Button>
+										</ActionsItem>
+									</Box>
+									<ItemPrice>R$ 19,88</ItemPrice>
+								</Item>
 							</ItemsList>
-							<hr />
-							<p>Total de itens: </p> <span>R$20,00</span>
-							<p>Entrega: </p>
-							<span>R$20,00</span>
-							<h4>Total: </h4>
-							<span>R$20,00</span>
-							<button type="submit">Confirmar pedido</button>
-						</CardBox>
+							<TotalCard>
+								<TotalCardRow>
+									<p>Total de itens:</p>
+									<TotalPrice>R$20,00</TotalPrice>
+								</TotalCardRow>
+
+								<TotalCardRow>
+									<p>Entrega:</p>
+									<TotalPrice>R$20,00</TotalPrice>
+								</TotalCardRow>
+								<TotalCardRow>
+									<h3>Total: </h3>
+									<h3>R$20,00</h3>
+								</TotalCardRow>
+							</TotalCard>
+							<ConfirmButton type="submit">Confirmar pedido</ConfirmButton>
+						</RightCardBox>
 					</div>
 				</ContainerScreen>
 			</Container>

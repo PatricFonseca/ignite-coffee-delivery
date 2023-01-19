@@ -16,15 +16,24 @@ export const ContainerScreen = styled.div`
 
 export const Main = styled.main`
 	flex: 1;
-	width: 50vw;
+	width: 45vw;
+	margin-right: 1rem;
 `;
 
-export const CardBox = styled.div`
+export const BaseCardBox = styled.div`
 	padding: 2.5rem;
 	background-color: ${(props) => props.theme["card"]};
-	border-radius: 6px;
 	margin-top: 1rem;
 	margin-right: 1rem;
+`;
+
+export const CardBox = styled(BaseCardBox)`
+	border-radius: 6px;
+`;
+
+export const RightCardBox = styled(BaseCardBox)`
+	width: 28rem;
+	border-radius: 6px 44px;
 `;
 
 export const CustomInput = styled(InputStyle)`
@@ -99,10 +108,96 @@ export const Image = styled.img`
 export const ItemsList = styled.ul`
 	li {
 		display: flex;
-		align-items: center;
+		/* align-items: center; */
 	}
+`;
+
+export const Box = styled.div`
+	margin-left: 1rem;
+	p {
+		margin-bottom: 0.4rem;
+		font-family: "Roboto";
+		font-style: normal;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 130%;
+	}
+`;
+
+export const Item = styled.li`
+	padding: 1rem 0;
+	border-bottom: 1px solid ${(props) => props.theme["base-button"]};
+`;
+
+export const ItemPrice = styled.span`
+	font-family: "Roboto";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 130%;
+	color: ${(props) => props.theme["base-text"]};
+
+	margin-left: auto;
+	padding-right: 0.2rem;
 `;
 
 export const ActionsItem = styled.div`
 	display: flex;
+	gap: 0.7rem;
+`;
+
+export const TotalCard = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-top: 1rem;
+
+	h3 {
+		font-family: "Roboto";
+		font-style: normal;
+		font-weight: 700;
+		font-size: 20px;
+		line-height: 130%;
+		color: ${(props) => props.theme["base-subtitle"]};
+	}
+`;
+
+export const TotalPrice = styled.span`
+	font-family: "Roboto";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 130%;
+	color: ${(props) => props.theme["base-text"]};
+`;
+export const TotalCardRow = styled.div`
+	display: flex;
+	justify-content: space-between;
+
+	p {
+		font-family: "Roboto";
+		font-style: normal;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 130%;
+		color: ${(props) => props.theme["base-text"]};
+	}
+`;
+
+export const ConfirmButton = styled.button`
+	width: 100%;
+	background-color: ${(props) => props.theme["yellow"]};
+	border-radius: 6px;
+	padding: 12px 8px;
+
+	margin-top: 1rem;
+
+	font-family: "Roboto";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 160%;
+	font-stretch: 100;
+	text-transform: uppercase;
+	color: #fff;
 `;

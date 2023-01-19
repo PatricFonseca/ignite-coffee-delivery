@@ -8,7 +8,7 @@ interface ISizes {
 
 const sizes = {
 	small: css`
-		padding: 0.5rem;
+		padding: 0.3rem;
 	`,
 	medium: css`
 		padding: 1rem;
