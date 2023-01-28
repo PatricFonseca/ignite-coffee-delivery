@@ -89,8 +89,23 @@ export const Col = styled("div")<IColProps>`
 `;
 
 export const ComplementInput = styled(Input)`
-	&::placeholder::after {
-		content: "-aa--";
+	/* &::placeholder {
+		font-size: 14px;
+		text-align: right;
+	} */
+	&:before {
+		content: "Texto esquerda";
+		color: gray;
+		font-size: 14px;
+		padding-right: 10px;
+	}
+
+	::after {
+		content: "Texto direita";
+		color: gray;
+		font-size: 14px;
+		padding-left: 10px;
+		text-align: right;
 	}
 `;
 
@@ -200,4 +215,26 @@ export const ConfirmButton = styled.button`
 	font-stretch: 100;
 	text-transform: uppercase;
 	color: #fff;
+`;
+
+interface LabelProps {
+	visible: string;
+}
+
+export const LabelOptional = styled.label<LabelProps>`
+	font-size: 14px;
+	color: gray;
+	padding-left: 10px;
+	text-align: right;
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	visibility: ${(props) => props.visible};
+	font-style: italic;
+`;
+
+export const ComplementContainer = styled.div`
+	position: relative;
+	width: 100%;
 `;

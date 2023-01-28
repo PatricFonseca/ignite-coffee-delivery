@@ -36,10 +36,14 @@ import {
 	TotalPrice,
 	TotalCardRow,
 	ConfirmButton,
+	LabelOptional,
+	ComplementContainer,
 } from "./styles";
 import { InputNumberWithButton } from "../../components/InputNumberWithButton";
 import TypeExpresso from "../../assets/img/TypeExpresso.svg";
 import TypeLatte from "../../assets/img/TypeLatte.svg";
+import { useState } from "react";
+// import FormExample from "../../components/InputComplement";
 
 interface ColorsTheme {
 	purple: string;
@@ -47,6 +51,8 @@ interface ColorsTheme {
 
 export function Checkout() {
 	const theme = useTheme() as ColorsTheme;
+	const [isVisibleComplementPlaceHolder, setIsVisibleComplementPlaceHolder] =
+		useState(true);
 	return (
 		<>
 			<Header />
@@ -80,10 +86,26 @@ export function Checkout() {
 							</Row>
 							<Row>
 								<Input type="text" placeholder="Número" size={15} />
-								<ComplementInput
-									type="text"
-									placeholder="Complemento                                             opcional"
-								/>
+								<ComplementContainer>
+									<ComplementInput
+										type="text"
+										placeholder="Complemento"
+										onFocus={() => setIsVisibleComplementPlaceHolder(false)}
+										onBlur={(e) => {
+											setIsVisibleComplementPlaceHolder(e.target.value === "");
+										}}
+									/>
+
+									<LabelOptional
+										visible={
+											isVisibleComplementPlaceHolder ? "visible" : "hidden"
+										}
+										// onClick={() => setIsVisibleComplementPlaceHolder(false)}
+									>
+										opcional
+									</LabelOptional>
+								</ComplementContainer>
+								{/* </div> */}
 							</Row>
 							<Row>
 								<Input type="text" placeholder="Bairro" size={20} />

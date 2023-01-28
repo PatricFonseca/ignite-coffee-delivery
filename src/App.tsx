@@ -4,6 +4,7 @@ import { defaultTheme } from "./styles/themes/default";
 import { CartContextProvider } from "./contexts/CartContext";
 import { Home } from "./pages/Home";
 import { Checkout } from "./pages/Checkout";
+import { SuccessPage } from "./pages/SuccessPage";
 
 function App() {
 	return (
@@ -12,6 +13,7 @@ function App() {
 				<CartContextProvider>
 					<Checkout />
 					{/* <Home /> */}
+					{/* <SuccessPage /> */}
 				</CartContextProvider>
 				<GlobalStyle />
 			</ThemeProvider>
