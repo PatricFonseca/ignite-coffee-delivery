@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
 	Bank,
 	CreditCard,
@@ -42,7 +44,6 @@ import {
 import { InputNumberWithButton } from "../../components/InputNumberWithButton";
 import TypeExpresso from "../../assets/img/TypeExpresso.svg";
 import TypeLatte from "../../assets/img/TypeLatte.svg";
-import { useState } from "react";
 // import FormExample from "../../components/InputComplement";
 
 interface ColorsTheme {
@@ -193,7 +194,9 @@ export function Checkout() {
 									<h3>R$20,00</h3>
 								</TotalCardRow>
 							</TotalCard>
-							<ConfirmButton type="submit">Confirmar pedido</ConfirmButton>
+							<Link to={"/success"}>
+								<ConfirmButton type="submit">Confirmar pedido</ConfirmButton>
+							</Link>
 						</RightCardBox>
 					</div>
 				</ContainerScreen>
