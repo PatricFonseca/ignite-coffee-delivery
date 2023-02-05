@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 	display: flex;
+	justify-content: space-between;
 	margin: 0 auto;
 	width: 80vw;
-	justify-content: space-between;
 	padding: 5rem 0;
+	gap: 2rem;
 `;
 
 export const SuccessTitle = styled.h1`
@@ -26,6 +27,7 @@ export const SuccessSubtitle = styled.h3`
 	line-height: 130%;
 
 	color: ${(props) => props.theme["base-subtitle"]};
+	margin-bottom: 2rem;
 `;
 
 export const InfoCardBorder = styled.div`
@@ -58,6 +60,22 @@ export const InfoCard = styled.div`
 	background: #fff;
 	padding: 2rem;
 	border-radius: 6px 36px;
+`;
+
+export const HeaderContainer = styled.div`
+	display: flex;
+`;
+
+interface IColProps {
+	gutter: number;
+}
+
+export const Col = styled("div")<IColProps>`
+	position: relative;
+	width: 100%;
+	min-height: 1px; // Prevent columns from collapsing when empty
+	padding-left: ${(props) => props.gutter / 2}rem;
+	padding-right: ${(props) => props.gutter / 2}rem;
 `;
 
 export const IconRounded = styled.div`

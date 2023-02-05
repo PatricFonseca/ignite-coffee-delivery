@@ -2,8 +2,9 @@ import { ReactNode } from "react";
 import { Container } from "./styles";
 
 interface RowProps {
-  children: ReactNode;
+	children: ReactNode;
+	size?: number;
 }
-export function Row({ children }: RowProps) {
-  return <Container>{children}</Container>;
+export function Row({ children, size = 1 }: RowProps) {
+	return <Container size={size}>{children}</Container>;
 }

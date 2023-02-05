@@ -1,5 +1,7 @@
 import { CurrencyDollarSimple, MapPin, Timer } from "phosphor-react";
+import { useTheme } from "styled-components";
 import { Header } from "../../components/Header";
+import { Row } from "../../components/Row";
 import {
 	Container,
 	IconRounded,
@@ -7,11 +9,21 @@ import {
 	InfoCardBorder,
 	SuccessSubtitle,
 	SuccessTitle,
+	HeaderContainer,
+	Col,
 } from "./styles";
+import SuccessImg from "../../assets/img/Success.svg";
 
 //TODO: Pegar cores do tema e passar pros components..
 
+interface ColorsTheme {
+	purple: string;
+	yellow: string;
+	"yellow-dark": string;
+}
+
 export function SuccessPage() {
+	const theme = useTheme() as ColorsTheme;
 	return (
 		<>
 			<Header />
@@ -24,30 +36,54 @@ export function SuccessPage() {
 
 					<InfoCardBorder>
 						<InfoCard>
-							<IconRounded color="purple">
-								<MapPin weight="fill" color="#fff" />
-							</IconRounded>
-							<p>
-								Entrega em <strong>Rua blables</strong>
-								<br />
-								Farrapos - Porto Alegre, RS
-							</p>
-							<Timer weight="fill" color="#fff" />
-							<p>
-								Previsão de entrega
-								<br />
-								<strong>20 min - 30 min</strong>
-							</p>
+							<HeaderContainer>
+								<IconRounded color={theme.purple}>
+									<MapPin weight="fill" color="#fff" />
+								</IconRounded>
+								<Col gutter={1}>
+									Entrega em <strong> Rua João Daniel Martinelli, 102</strong>
+								</Col>
+							</HeaderContainer>
+							<Row size={2}>
+								<Col gutter={4}>
+									<p>Farrapos - Porto Alegre, RS</p>
+								</Col>
+							</Row>
 
-							<CurrencyDollarSimple />
-							<p>
-								Pagamento na entrega
-								<br />
-								<strong>Cartão de crédito</strong>
-							</p>
+							<HeaderContainer>
+								<IconRounded color={theme.yellow}>
+									<Timer weight="fill" color="#fff" />
+								</IconRounded>
+								<Col gutter={1}>Previsão de entrega</Col>
+							</HeaderContainer>
+							<Row size={2}>
+								<Col gutter={4}>
+									<p>
+										<strong>20 min - 30 min</strong>
+									</p>
+								</Col>
+							</Row>
+
+							<HeaderContainer>
+								<IconRounded color={theme["yellow-dark"]}>
+									<CurrencyDollarSimple weight="fill" color="#fff" />
+								</IconRounded>
+								<Col gutter={1}>Pagamento na entrega</Col>
+							</HeaderContainer>
+							<Row size={1}>
+								<Col gutter={4}>
+									<p>
+										<strong>Cartão de crédito</strong>
+									</p>
+								</Col>
+							</Row>
 						</InfoCard>
 					</InfoCardBorder>
 				</div>
+				<img
+					src={SuccessImg}
+					alt="homem em uma moto, indo entregar a encomenda"
+				/>
 			</Container>
 		</>
 	);
