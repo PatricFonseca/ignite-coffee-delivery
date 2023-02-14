@@ -1,5 +1,4 @@
 import { Coffee, MapPin, Package, ShoppingCart, Timer } from "phosphor-react";
-import CoffeeDelivery from "../../assets/img/CoffeeDelivery.svg";
 import {
 	Container,
 	SubTitle,
@@ -13,6 +12,8 @@ import {
 } from "./styles";
 import { ItemGrid } from "./components/ItemGrid";
 import { Header } from "../../components/Header";
+import CoffeeDelivery from "../../assets/img/CoffeeDelivery.svg";
+import { Coffees } from "../../assets/CoffeeList";
 
 export function Home() {
 	return (
@@ -72,7 +73,16 @@ export function Home() {
 			<TitleGrid>Nossos cafés</TitleGrid>
 			<ContainerGrid>
 				<GridCoffees>
-					<ItemGrid />
+					{Coffees.map((coffee, key) => {
+						return (
+							<ItemGrid
+								id={coffee.id}
+								name={coffee.name}
+								price={coffee.price}
+								imgSrc={coffee.imgSrc}
+							/>
+						);
+					})}
 				</GridCoffees>
 			</ContainerGrid>
 		</>

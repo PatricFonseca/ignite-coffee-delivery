@@ -13,10 +13,6 @@ import { CartContext } from "../../contexts/CartContext";
 export function Header() {
 	const { cartItens, quantityDifferentItens } = useContext(CartContext);
 
-	useEffect(() => {
-		console.log("header itens", cartItens.length);
-	}, [cartItens]);
-
 	return (
 		<>
 			<HeaderContainer>

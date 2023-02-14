@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import {
 	Bank,
@@ -44,7 +44,8 @@ import {
 import { InputNumberWithButton } from "../../components/InputNumberWithButton";
 import TypeExpresso from "../../assets/img/TypeExpresso.svg";
 import TypeLatte from "../../assets/img/TypeLatte.svg";
-// import FormExample from "../../components/InputComplement";
+import { CartContext } from "../../contexts/CartContext";
+import { formatter } from "../../utils/lib";
 
 interface ColorsTheme {
 	purple: string;
@@ -52,6 +53,7 @@ interface ColorsTheme {
 
 export function Checkout() {
 	const theme = useTheme() as ColorsTheme;
+	const { cartItens, totalItems, total } = useContext(CartContext);
 	const [isVisibleComplementPlaceHolder, setIsVisibleComplementPlaceHolder] =
 		useState(true);
 	return (
@@ -152,46 +154,41 @@ export function Checkout() {
 						<Title>Cafés selecionados</Title>
 						<RightCardBox>
 							<ItemsList>
-								<Item>
-									<Image src={TypeExpresso} />
-									<Box>
-										<p>Expresso tradicional</p>
-										<ActionsItem>
-											<InputNumberWithButton number={1} setNumber={() => {}} />
-											<Button size="small">
-												<Trash color={theme.purple} /> Remover
-											</Button>
-										</ActionsItem>
-									</Box>
-									<ItemPrice>R$ 19,88</ItemPrice>
-								</Item>
-								<Item>
-									<Image src={TypeLatte} />
-									<Box>
-										<p>Expresso tradicional</p>
-										<ActionsItem>
-											<InputNumberWithButton number={1} setNumber={() => {}} />
-											<Button size="small">
-												<Trash color={theme.purple} /> Remover
-											</Button>
-										</ActionsItem>
-									</Box>
-									<ItemPrice>R$ 19,88</ItemPrice>
-								</Item>
+								{cartItens &&
+									cartItens.map((item, key) => {
+										return (
+											<Item>
+												<Image src={TypeExpresso} />
+												<Box>
+													<p>{item.name}</p>
+													<ActionsItem>
+														<InputNumberWithButton
+															number={item.quantity}
+															setNumber={() => {}}
+														/>
+														<Button size="small">
+															<Trash color={theme.purple} /> Remover
+														</Button>
+													</ActionsItem>
+												</Box>
+												<ItemPrice>{formatter.format(item.price)}</ItemPrice>
+											</Item>
+										);
+									})}
 							</ItemsList>
 							<TotalCard>
 								<TotalCardRow>
 									<p>Total de itens:</p>
-									<TotalPrice>R$20,00</TotalPrice>
+									<TotalPrice>{formatter.format(totalItems)}</TotalPrice>
 								</TotalCardRow>
 
 								<TotalCardRow>
 									<p>Entrega:</p>
-									<TotalPrice>R$20,00</TotalPrice>
+									<TotalPrice>{formatter.format(10)}</TotalPrice>
 								</TotalCardRow>
 								<TotalCardRow>
 									<h3>Total: </h3>
-									<h3>R$20,00</h3>
+									<h3>{formatter.format(total)}</h3>
 								</TotalCardRow>
 							</TotalCard>
 							<Link to={"/success"}>

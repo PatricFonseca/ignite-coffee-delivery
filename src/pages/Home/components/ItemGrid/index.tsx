@@ -14,7 +14,14 @@ import {
 	ShoppingButton,
 } from "./styles";
 
-export function ItemGrid() {
+interface ItemProps {
+	id: string;
+	name: string;
+	price: number;
+	imgSrc: string;
+}
+
+export function ItemGrid({ id, name, price, imgSrc }: ItemProps) {
 	const { addCartItem } = useContext(CartContext);
 
 	const [quantity, setQuantity] = useState(1);
@@ -26,19 +33,25 @@ export function ItemGrid() {
 			</div>
 			<Label>Tradicional</Label>
 
-			<Name>Expresso Tradicional</Name>
+			<Name>{name}</Name>
 			<Description>
 				O tradicional café feito com água quente e grãos moidos
 			</Description>
 
 			<ContainerOptions>
 				<Price>
-					R$ <strong>9,90</strong>
+					R$ <strong>{price}</strong>
 				</Price>
 				<InputNumberWithButton number={quantity} setNumber={setQuantity} />
 				<ShoppingButton
 					onClick={() => {
-						addCartItem({ id: "1", name: "coffee", quantity: quantity });
+						addCartItem({
+							id: id,
+							name: name,
+							quantity: quantity,
+							imgSrc: imgSrc,
+							price: price,
+						});
 						// updateCartItems(cartItens);
 					}}
 				>
