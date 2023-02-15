@@ -53,7 +53,8 @@ interface ColorsTheme {
 
 export function Checkout() {
 	const theme = useTheme() as ColorsTheme;
-	const { cartItens, totalItems, total } = useContext(CartContext);
+	const { cartItens, totalItems, total, removeItem, updateItem } =
+		useContext(CartContext);
 	const [isVisibleComplementPlaceHolder, setIsVisibleComplementPlaceHolder] =
 		useState(true);
 	return (
@@ -157,16 +158,21 @@ export function Checkout() {
 								{cartItens &&
 									cartItens.map((item, key) => {
 										return (
-											<Item>
+											<Item key={key}>
 												<Image src={TypeExpresso} />
 												<Box>
 													<p>{item.name}</p>
 													<ActionsItem>
 														<InputNumberWithButton
 															number={item.quantity}
-															setNumber={() => {}}
+															setNumber={(newQuantity) => {
+																updateItem(item, newQuantity);
+															}}
 														/>
-														<Button size="small">
+														<Button
+															size="small"
+															onClick={() => removeItem(item.id)}
+														>
 															<Trash color={theme.purple} /> Remover
 														</Button>
 													</ActionsItem>

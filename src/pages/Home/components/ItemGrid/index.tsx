@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import TypeExpresso from "../../../../assets/img/TypeExpresso.svg";
 import { InputNumberWithButton } from "../../../../components/InputNumberWithButton";
 import { CartContext } from "../../../../contexts/CartContext";
+import { formatter } from "../../../../utils/lib";
 import {
 	Card,
 	ContainerOptions,
@@ -40,7 +41,7 @@ export function ItemGrid({ id, name, price, imgSrc }: ItemProps) {
 
 			<ContainerOptions>
 				<Price>
-					R$ <strong>{price}</strong>
+					<strong>{formatter.format(price)}</strong>
 				</Price>
 				<InputNumberWithButton number={quantity} setNumber={setQuantity} />
 				<ShoppingButton

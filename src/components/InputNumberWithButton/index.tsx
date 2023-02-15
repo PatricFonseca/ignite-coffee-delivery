@@ -50,16 +50,16 @@ export function InputNumberWithButton({
 		<>
 			<Container>
 				<ButtonSpinEditLeft
-					size="small"
+					size="medium"
 					onClick={() => handleQuantity(TYPE["decrease"])}
 				>
 					<span>
 						<Minus weight="bold" />
 					</span>
 				</ButtonSpinEditLeft>
-				<InputNumber size="small">{quantity}</InputNumber>
+				<InputNumber size="medium">{quantity}</InputNumber>
 				<ButtonSpinEditRight
-					size="small"
+					size="medium"
 					onClick={() => handleQuantity(TYPE["increase"])}
 				>
 					<span>

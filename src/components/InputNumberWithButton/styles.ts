@@ -12,7 +12,7 @@ const spanSizes = {
 		padding: 0.29rem 0.2rem;
 	`,
 	medium: css`
-		padding: 0.56rem;
+		padding: 0.52rem;
 	`,
 };
 

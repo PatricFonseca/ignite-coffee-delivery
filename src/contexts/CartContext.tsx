@@ -28,8 +28,10 @@ interface cartContextProps {
 	quantityDifferentItens: number;
 	totalItems: number;
 	total: number;
-	updateCartItems: (cartItens: itemCart[]) => void;
+	// updateCartItems: (cartItens: itemCart[]) => void;
+	removeItem: (id: string) => void;
 	addCartItem: (itemcart: itemCart) => void;
+	updateItem: (itemCart: itemCart, quantity: number) => void;
 }
 
 interface CartContextProviderProps {
@@ -48,27 +50,47 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
 	useEffect(() => {
 		const totalValues = cartItens.reduce<number>(
-			(prevValue: number, elem: itemCart) =>
-				prevValue + elem.price * elem.quantity,
+			(acc: number, elem: itemCart) => acc + elem.price * elem.quantity,
 			0
 		);
 		setTotalItems(totalValues);
 
 		setTotal(totalValues + deliveryValue);
+		setQuantiyDifferentItens(cartItens.length || 0);
 	}, [cartItens, deliveryValue]);
 
-	function updateCartItems(items: itemCart[]) {
-		setCartItens(items);
-		console.log(items.length);
-		console.log("itens", cartItens);
+	function updateItem(itemCart: itemCart, quantity: number) {
+		const newCartItems = cartItens.filter((item) => {
+			item.id !== itemCart.id;
+		});
+
+		itemCart.quantity = quantity;
+		newCartItems.push(itemCart);
+
+		setCartItens(newCartItems);
+	}
+
+	function removeItem(id: string) {
+		const filteredItems = cartItens.filter((item) => {
+			item.id !== id;
+		});
+
+		setCartItens(filteredItems);
 	}
 
 	function addCartItem({ name, quantity, id, imgSrc, price }: itemCart) {
-		if (cartItens.findIndex((item) => item.id === id) < 0) {
-			setQuantiyDifferentItens((prev) => prev + 1);
+		if (cartItens.findIndex((item) => item.id === id) >= 0) {
+			const item = {
+				name,
+				quantity,
+				id,
+				imgSrc,
+				price,
+			};
+			updateItem(item, quantity);
+		} else {
+			setCartItens([...cartItens, { id, quantity, name, imgSrc, price }]);
 		}
-
-		setCartItens([...cartItens, { id, quantity, name, imgSrc, price }]);
 	}
 
 	return (
@@ -76,8 +98,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 			value={{
 				cartItens,
 				quantityDifferentItens,
-				updateCartItems,
+				removeItem,
 				addCartItem,
+				updateItem,
 				totalItems,
 				total,
 			}}

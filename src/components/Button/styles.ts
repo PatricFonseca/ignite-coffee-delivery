@@ -8,7 +8,7 @@ interface ISizes {
 
 const sizes = {
 	small: css`
-		padding: 0.3rem;
+		padding: 0.5rem;
 	`,
 	medium: css`
 		padding: 1rem;
@@ -20,9 +20,8 @@ export const ButtonStyled = styled.button<{ size: keyof ISizes }>`
 	align-items: center;
 	background-color: ${(props) => props.theme["base-button"]};
 	border-radius: 6px;
-	gap: 12px;
+	gap: 7px;
 	text-transform: uppercase;
-	/* padding: 1rem; */
 
 	${({ size }) => sizes[size]}
 
