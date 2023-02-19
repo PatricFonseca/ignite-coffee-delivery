@@ -12,8 +12,8 @@ import {
 } from "./styles";
 import { ItemGrid } from "./components/ItemGrid";
 import { Header } from "../../components/Header";
-import CoffeeDelivery from "../../assets/img/CoffeeDelivery.svg";
-import { Coffees } from "../../assets/CoffeeList";
+import { Coffees } from "../../data/CoffeeList";
+import CoffeeDelivery from "../../../public/assets/img/CoffeeDelivery.svg";
 
 export function Home() {
 	return (
@@ -76,10 +76,13 @@ export function Home() {
 					{Coffees.map((coffee, key) => {
 						return (
 							<ItemGrid
+								key={key}
 								id={coffee.id}
 								name={coffee.name}
 								price={coffee.price}
 								imgSrc={coffee.imgSrc}
+								types={coffee.types}
+								description={coffee.description}
 							/>
 						);
 					})}

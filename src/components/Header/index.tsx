@@ -7,7 +7,7 @@ import {
 	HeaderContainer,
 	LocationButton,
 } from "./styles";
-import ImgLogo from "../../assets/img/Logo.svg";
+import ImgLogo from "../../../public/assets/img/Logo.svg";
 import { CartContext } from "../../contexts/CartContext";
 
 export function Header() {

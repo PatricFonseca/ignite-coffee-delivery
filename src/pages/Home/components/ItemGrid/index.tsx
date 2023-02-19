@@ -1,6 +1,6 @@
 import { ShoppingCart } from "phosphor-react";
 import { useContext, useState } from "react";
-import TypeExpresso from "../../../../assets/img/TypeExpresso.svg";
+// import TypeExpresso from "../../../../assets/img/TypeExpresso.svg";
 import { InputNumberWithButton } from "../../../../components/InputNumberWithButton";
 import { CartContext } from "../../../../contexts/CartContext";
 import { formatter } from "../../../../utils/lib";
@@ -13,6 +13,7 @@ import {
 	Name,
 	Price,
 	ShoppingButton,
+	Types,
 } from "./styles";
 
 interface ItemProps {
@@ -20,25 +21,32 @@ interface ItemProps {
 	name: string;
 	price: number;
 	imgSrc: string;
+	types: string[];
+	description: string;
 }
 
-export function ItemGrid({ id, name, price, imgSrc }: ItemProps) {
+export function ItemGrid({
+	id,
+	name,
+	price,
+	imgSrc,
+	types,
+	description,
+}: ItemProps) {
 	const { addCartItem } = useContext(CartContext);
 
 	const [quantity, setQuantity] = useState(1);
 
 	return (
 		<Card>
-			<div>
-				<Image src={TypeExpresso} alt="" />
-			</div>
-			<Label>Tradicional</Label>
-
+			<Image src={imgSrc} alt="" />
+			<Types>
+				{types?.map((type) => {
+					return <Label>{type}</Label>;
+				})}
+			</Types>
 			<Name>{name}</Name>
-			<Description>
-				O tradicional café feito com água quente e grãos moidos
-			</Description>
-
+			<Description>{description}</Description>
 			<ContainerOptions>
 				<Price>
 					<strong>{formatter.format(price)}</strong>
@@ -52,6 +60,8 @@ export function ItemGrid({ id, name, price, imgSrc }: ItemProps) {
 							quantity: quantity,
 							imgSrc: imgSrc,
 							price: price,
+							types: types,
+							description: description,
 						});
 						// updateCartItems(cartItens);
 					}}

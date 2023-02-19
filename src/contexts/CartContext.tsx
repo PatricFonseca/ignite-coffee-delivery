@@ -6,21 +6,14 @@ import {
 	useState,
 } from "react";
 
-// interface CartProduct {
-//   id: string;
-//   name: string;
-// }
-
-// interface Cart {
-//   products: CartProduct[];
-// }
-
 interface itemCart {
 	name: string;
 	id: string;
 	quantity: number;
 	imgSrc: string;
 	price: number;
+	types: string[];
+	description: string;
 }
 
 interface cartContextProps {
@@ -28,7 +21,6 @@ interface cartContextProps {
 	quantityDifferentItens: number;
 	totalItems: number;
 	total: number;
-	// updateCartItems: (cartItens: itemCart[]) => void;
 	removeItem: (id: string) => void;
 	addCartItem: (itemcart: itemCart) => void;
 	updateItem: (itemCart: itemCart, quantity: number) => void;
@@ -43,7 +35,10 @@ const deliveryValue = 10;
 export const CartContext = createContext({} as cartContextProps);
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
-	const [cartItens, setCartItens] = useState<itemCart[]>([]);
+	const itemsStorage = localStorage.getItem("cartItens");
+	const defaultCartItens = itemsStorage ? JSON.parse(itemsStorage) : [];
+
+	const [cartItens, setCartItens] = useState<itemCart[]>(defaultCartItens);
 	const [quantityDifferentItens, setQuantiyDifferentItens] = useState(0);
 	const [totalItems, setTotalItems] = useState(0);
 	const [total, setTotal] = useState(0);
@@ -57,6 +52,8 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
 		setTotal(totalValues + deliveryValue);
 		setQuantiyDifferentItens(cartItens.length || 0);
+
+		localStorage.setItem("cartItens", JSON.stringify(cartItens));
 	}, [cartItens, deliveryValue]);
 
 	function updateItem(itemCart: itemCart, quantity: number) {
@@ -78,7 +75,15 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 		setCartItens(filteredItems);
 	}
 
-	function addCartItem({ name, quantity, id, imgSrc, price }: itemCart) {
+	function addCartItem({
+		name,
+		quantity,
+		id,
+		imgSrc,
+		price,
+		types,
+		description,
+	}: itemCart) {
 		if (cartItens.findIndex((item) => item.id === id) >= 0) {
 			const item = {
 				name,
@@ -86,10 +91,15 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 				id,
 				imgSrc,
 				price,
+				types,
+				description,
 			};
 			updateItem(item, quantity);
 		} else {
-			setCartItens([...cartItens, { id, quantity, name, imgSrc, price }]);
+			setCartItens([
+				...cartItens,
+				{ id, quantity, name, imgSrc, price, types, description },
+			]);
 		}
 	}
 

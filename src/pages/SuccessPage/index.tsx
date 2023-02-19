@@ -12,7 +12,8 @@ import {
 	HeaderContainer,
 	Col,
 } from "./styles";
-import SuccessImg from "../../assets/img/Success.svg";
+// import SuccessImg from "../../../public/assets/img/Success.png";
+import SuccessImg from "../../../public/assets/img/Success.svg";
 
 //TODO: Pegar cores do tema e passar pros components..
 

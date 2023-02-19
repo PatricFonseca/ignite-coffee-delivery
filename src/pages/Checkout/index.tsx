@@ -42,8 +42,8 @@ import {
 	ComplementContainer,
 } from "./styles";
 import { InputNumberWithButton } from "../../components/InputNumberWithButton";
-import TypeExpresso from "../../assets/img/TypeExpresso.svg";
-import TypeLatte from "../../assets/img/TypeLatte.svg";
+// import TypeExpresso from "../../assets/img/TypeExpresso.svg";
+// import TypeLatte from "../../assets/img/TypeLatte.svg";
 import { CartContext } from "../../contexts/CartContext";
 import { formatter } from "../../utils/lib";
 
@@ -159,7 +159,7 @@ export function Checkout() {
 									cartItens.map((item, key) => {
 										return (
 											<Item key={key}>
-												<Image src={TypeExpresso} />
+												<Image src={item.imgSrc} />
 												<Box>
 													<p>{item.name}</p>
 													<ActionsItem>

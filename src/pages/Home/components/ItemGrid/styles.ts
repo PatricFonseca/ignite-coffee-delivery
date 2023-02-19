@@ -92,3 +92,8 @@ export const ShoppingButton = styled.button`
 		background-color: ${(props) => props.theme["purple"]};
 	}
 `;
+
+export const Types = styled.div`
+	display: flex;
+	gap: 3px;
+`;
