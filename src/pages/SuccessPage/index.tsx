@@ -13,9 +13,7 @@ import {
 	Col,
 } from "./styles";
 // import SuccessImg from "../../../public/assets/img/Success.png";
-import SuccessImg from "../../../public/assets/img/Success.svg";
-
-//TODO: Pegar cores do tema e passar pros components..
+import SuccessImg from "/assets/img/Success.svg";
 
 interface ColorsTheme {
 	purple: string;

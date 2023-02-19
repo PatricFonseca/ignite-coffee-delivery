@@ -1,4 +1,4 @@
-import { Coffee, MapPin, Package, ShoppingCart, Timer } from "phosphor-react";
+import { Coffee, Package, ShoppingCart, Timer } from "phosphor-react";
 import {
 	Container,
 	SubTitle,
@@ -13,7 +13,7 @@ import {
 import { ItemGrid } from "./components/ItemGrid";
 import { Header } from "../../components/Header";
 import { Coffees } from "../../data/CoffeeList";
-import CoffeeDelivery from "../../../public/assets/img/CoffeeDelivery.svg";
+import CoffeeDelivery from "/assets/img/CoffeeDelivery.svg";
 
 export function Home() {
 	return (

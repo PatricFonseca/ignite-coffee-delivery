@@ -166,7 +166,7 @@ export function Checkout() {
 														<InputNumberWithButton
 															number={item.quantity}
 															setNumber={(newQuantity) => {
-																updateItem(item, newQuantity);
+																updateItem(item.id, newQuantity);
 															}}
 														/>
 														<Button

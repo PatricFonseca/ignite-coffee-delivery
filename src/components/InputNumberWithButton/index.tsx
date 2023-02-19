@@ -51,7 +51,10 @@ export function InputNumberWithButton({
 			<Container>
 				<ButtonSpinEditLeft
 					size="medium"
-					onClick={() => handleQuantity(TYPE["decrease"])}
+					onClick={(e) => {
+						handleQuantity(TYPE["decrease"]);
+						e.preventDefault();
+					}}
 				>
 					<span>
 						<Minus weight="bold" />
@@ -60,7 +63,10 @@ export function InputNumberWithButton({
 				<InputNumber size="medium">{quantity}</InputNumber>
 				<ButtonSpinEditRight
 					size="medium"
-					onClick={() => handleQuantity(TYPE["increase"])}
+					onClick={(e) => {
+						handleQuantity(TYPE["increase"]);
+						e.preventDefault();
+					}}
 				>
 					<span>
 						<Plus weight="bold" />

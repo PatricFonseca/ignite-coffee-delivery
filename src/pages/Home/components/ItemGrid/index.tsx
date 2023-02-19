@@ -17,6 +17,7 @@ import {
 } from "./styles";
 
 interface ItemProps {
+	key: number;
 	id: string;
 	name: string;
 	price: number;
@@ -26,6 +27,7 @@ interface ItemProps {
 }
 
 export function ItemGrid({
+	key,
 	id,
 	name,
 	price,
@@ -38,7 +40,7 @@ export function ItemGrid({
 	const [quantity, setQuantity] = useState(1);
 
 	return (
-		<Card>
+		<Card key={key}>
 			<Image src={imgSrc} alt="" />
 			<Types>
 				{types?.map((type) => {

@@ -23,7 +23,7 @@ interface cartContextProps {
 	total: number;
 	removeItem: (id: string) => void;
 	addCartItem: (itemcart: itemCart) => void;
-	updateItem: (itemCart: itemCart, quantity: number) => void;
+	updateItem: (id: string, quantity: number) => void;
 }
 
 interface CartContextProviderProps {
@@ -56,21 +56,21 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 		localStorage.setItem("cartItens", JSON.stringify(cartItens));
 	}, [cartItens, deliveryValue]);
 
-	function updateItem(itemCart: itemCart, quantity: number) {
-		const newCartItems = cartItens.filter((item) => {
-			item.id !== itemCart.id;
+	function updateItem(id: string, quantity: number) {
+		const newCartItems = cartItens.map((item) => {
+			if (item.id === id) {
+				item.quantity = quantity;
+				return item;
+			} else {
+				return item;
+			}
 		});
-
-		itemCart.quantity = quantity;
-		newCartItems.push(itemCart);
 
 		setCartItens(newCartItems);
 	}
 
 	function removeItem(id: string) {
-		const filteredItems = cartItens.filter((item) => {
-			item.id !== id;
-		});
+		const filteredItems = cartItens.filter((item) => item.id !== id);
 
 		setCartItens(filteredItems);
 	}
@@ -85,16 +85,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 		description,
 	}: itemCart) {
 		if (cartItens.findIndex((item) => item.id === id) >= 0) {
-			const item = {
-				name,
-				quantity,
-				id,
-				imgSrc,
-				price,
-				types,
-				description,
-			};
-			updateItem(item, quantity);
+			updateItem(id, quantity);
 		} else {
 			setCartItens([
 				...cartItens,
