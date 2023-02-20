@@ -1,4 +1,4 @@
-![imagem projeto](public\assets\Project.png)
+![imagem projeto](https://github.com/PatricFonseca/ignite-coffee-delivery/blob/main/public/assets/Project.png)
 
 #### Future implementations
 
