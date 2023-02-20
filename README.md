@@ -1,3 +1,5 @@
+![imagem projeto](public\assets\Project.png)
+
 #### Future implementations
 
 - [ ] Add notifications
