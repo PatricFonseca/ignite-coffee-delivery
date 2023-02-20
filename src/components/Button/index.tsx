@@ -11,12 +11,18 @@ interface ISizes {
 interface ButtonProps {
 	children: ReactNode;
 	size?: keyof ISizes;
+	active?: boolean;
 	onClick?: () => void;
 }
 
-export function Button({ children, size = "medium", ...props }: ButtonProps) {
+export function Button({
+	children,
+	size = "medium",
+	active = false,
+	...props
+}: ButtonProps) {
 	return (
-		<ButtonStyled size={size} onClick={props.onClick}>
+		<ButtonStyled size={size} onClick={props.onClick} active={active}>
 			{children}
 		</ButtonStyled>
 	);

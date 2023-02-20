@@ -14,4 +14,9 @@ export const InputStyle = styled.input`
 
 	font-size: 0.87rem;
 	line-height: 1.14rem;
+
+	&:focus,
+	&:hover {
+		border: 1px solid ${(props) => props.theme["yellow-dark"]};
+	}
 `;

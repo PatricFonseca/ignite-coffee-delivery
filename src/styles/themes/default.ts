@@ -16,4 +16,5 @@ export const defaultTheme = {
 	"base-text": "#574F4D",
 	"base-label": "#8D8686",
 	"base-button": "#E6E5E5",
+	"base-hover": "#D7D5D5",
 };

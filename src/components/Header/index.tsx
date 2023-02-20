@@ -1,17 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { MapPin, ShoppingCart } from "phosphor-react";
-import { Link } from "react-router-dom";
 import {
 	CartButton,
 	HeaderBox,
 	HeaderContainer,
 	LocationButton,
 } from "./styles";
-import ImgLogo from "../../../public/assets/img/Logo.svg";
+import ImgLogo from "/assets/img/Logo.svg";
 import { CartContext } from "../../contexts/CartContext";
 
 export function Header() {
-	const { cartItens, quantityDifferentItens } = useContext(CartContext);
+	const { quantityDifferentItens } = useContext(CartContext);
 
 	return (
 		<>

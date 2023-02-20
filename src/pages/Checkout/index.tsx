@@ -51,12 +51,24 @@ interface ColorsTheme {
 	purple: string;
 }
 
+enum PaymentsType {
+	UNDEFINED,
+	CREDIT_CARD,
+	DEBIT_CARD,
+	CASH,
+}
+
 export function Checkout() {
 	const theme = useTheme() as ColorsTheme;
 	const { cartItens, totalItems, total, removeItem, updateItem } =
 		useContext(CartContext);
 	const [isVisibleComplementPlaceHolder, setIsVisibleComplementPlaceHolder] =
 		useState(true);
+
+	const [activePayment, setActivePayment] = useState<PaymentsType>(
+		PaymentsType.UNDEFINED
+	);
+
 	return (
 		<>
 			<Header />
@@ -136,15 +148,30 @@ export function Checkout() {
 								</Row>
 							</HeaderBox>
 							<PaymentButtons>
-								<Button>
+								<Button
+									onClick={() => {
+										setActivePayment(PaymentsType.CREDIT_CARD);
+									}}
+									active={activePayment === PaymentsType.CREDIT_CARD}
+								>
 									<CreditCard size={16} color={theme.purple} />
 									Cartão de crédito
 								</Button>
-								<Button>
+								<Button
+									onClick={() => {
+										setActivePayment(PaymentsType.DEBIT_CARD);
+									}}
+									active={activePayment === PaymentsType.DEBIT_CARD}
+								>
 									<Bank size={16} color={theme.purple} />
 									Cartão de débito
 								</Button>
-								<Button>
+								<Button
+									onClick={() => {
+										setActivePayment(PaymentsType.CASH);
+									}}
+									active={activePayment === PaymentsType.CASH}
+								>
 									<Money size={16} color={theme.purple} />
 									Dinheiro
 								</Button>

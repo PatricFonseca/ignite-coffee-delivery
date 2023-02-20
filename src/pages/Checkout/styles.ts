@@ -215,6 +215,10 @@ export const ConfirmButton = styled.button`
 	font-stretch: 100;
 	text-transform: uppercase;
 	color: #fff;
+
+	&:hover {
+		background-color: ${(props) => props.theme["yellow-dark"]};
+	}
 `;
 
 interface LabelProps {

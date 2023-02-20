@@ -15,7 +15,10 @@ const sizes = {
 	`,
 };
 
-export const ButtonStyled = styled.button<{ size: keyof ISizes }>`
+export const ButtonStyled = styled.button<{
+	size: keyof ISizes;
+	active: boolean;
+}>`
 	display: flex;
 	align-items: center;
 	background-color: ${(props) => props.theme["base-button"]};
@@ -23,14 +26,21 @@ export const ButtonStyled = styled.button<{ size: keyof ISizes }>`
 	gap: 7px;
 	text-transform: uppercase;
 
-	${({ size }) => sizes[size]}
+	/* ${({ size }) => sizes[size]} */
+	${(props) => sizes[props.size]}
 
 	flex: none;
 	order: 0;
 	flex-grow: 1;
 
+	/* background-color: ${({ props, active }: any) =>
+		active ? props?.theme["purple-light"] : props?.theme["base-button"]}; */
+
+	background-color: ${(props) =>
+		props.active ? props?.theme["purple-light"] : props?.theme["base-button"]};
+
 	&:hover {
-		background-color: ${(props) => props.theme["purple-light"]};
+		background-color: ${(props) => props.theme["base-hover"]};
 	}
 `;
 
