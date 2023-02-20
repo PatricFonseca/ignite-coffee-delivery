@@ -6,6 +6,12 @@ import {
 	useState,
 } from "react";
 
+type PaymentsType =
+	| "Sem pagamento"
+	| "Cartão de crédito"
+	| "Cartão de débito"
+	| "Dinheiro";
+
 interface itemCart {
 	name: string;
 	id: string;
@@ -16,14 +22,26 @@ interface itemCart {
 	description: string;
 }
 
+type Address = {
+	street: string;
+	number: string;
+	city: string;
+	state: string;
+	zip: string;
+	neighborhood: string;
+};
+
 interface cartContextProps {
 	cartItens: itemCart[];
 	quantityDifferentItens: number;
 	totalItems: number;
 	total: number;
+	address?: Address;
+	paymentType: PaymentsType;
 	removeItem: (id: string) => void;
 	addCartItem: (itemcart: itemCart) => void;
 	updateItem: (id: string, quantity: number) => void;
+	checkout: (adress: Address, payment: PaymentsType) => void;
 }
 
 interface CartContextProviderProps {
@@ -42,6 +60,8 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 	const [quantityDifferentItens, setQuantiyDifferentItens] = useState(0);
 	const [totalItems, setTotalItems] = useState(0);
 	const [total, setTotal] = useState(0);
+	const [address, setAddress] = useState<Address>();
+	const [paymentType, setPaymentType] = useState<PaymentsType>("Sem pagamento");
 
 	useEffect(() => {
 		const totalValues = cartItens.reduce<number>(
@@ -94,16 +114,33 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 		}
 	}
 
+	function checkout(adress: Address, payment: PaymentsType) {
+		const checkoutAdress = {
+			street: adress.street,
+			number: adress.number,
+			city: adress.city,
+			state: adress.state,
+			zip: adress.zip,
+			neighborhood: adress.neighborhood,
+		};
+		setAddress(checkoutAdress);
+		setPaymentType(payment);
+		setCartItens([]);
+	}
+
 	return (
 		<CartContext.Provider
 			value={{
 				cartItens,
 				quantityDifferentItens,
+				totalItems,
+				total,
+				address,
+				paymentType,
 				removeItem,
 				addCartItem,
 				updateItem,
-				totalItems,
-				total,
+				checkout,
 			}}
 		>
 			{children}

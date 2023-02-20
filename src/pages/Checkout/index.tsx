@@ -51,23 +51,38 @@ interface ColorsTheme {
 	purple: string;
 }
 
-enum PaymentsType {
-	UNDEFINED,
-	CREDIT_CARD,
-	DEBIT_CARD,
-	CASH,
-}
+type PaymentsType =
+	| "Sem pagamento"
+	| "Cartão de crédito"
+	| "Cartão de débito"
+	| "Dinheiro";
+
+// interface Address {
+// 	street: string;
+// 	number: string;
+// 	city: string;
+// 	state: string;
+// 	zip: string;
+// 	neighbourhood: string;
+// }
 
 export function Checkout() {
 	const theme = useTheme() as ColorsTheme;
-	const { cartItens, totalItems, total, removeItem, updateItem } =
+	const { cartItens, totalItems, total, removeItem, updateItem, checkout } =
 		useContext(CartContext);
 	const [isVisibleComplementPlaceHolder, setIsVisibleComplementPlaceHolder] =
 		useState(true);
 
-	const [activePayment, setActivePayment] = useState<PaymentsType>(
-		PaymentsType.UNDEFINED
-	);
+	const [activePayment, setActivePayment] =
+		useState<PaymentsType>("Sem pagamento");
+
+	const [zip, setZip] = useState("");
+	const [street, setStreet] = useState("");
+	const [neighborhood, setNeighborhood] = useState("");
+	const [number, setNumber] = useState("");
+	const [complement, setComplement] = useState("");
+	const [city, setCity] = useState("");
+	const [state, setState] = useState("");
 
 	return (
 		<>
@@ -95,13 +110,36 @@ export function Checkout() {
 								</Row>
 							</HeaderBox>
 							<Row>
-								<Input type="text" placeholder="CEP" size={11} />
+								<Input
+									type="text"
+									placeholder="CEP"
+									size={11}
+									value={zip}
+									onChange={(e) => {
+										setZip(e.target.value);
+									}}
+								/>
 							</Row>
 							<Row>
-								<Input type="text" placeholder="Rua" />
+								<Input
+									type="text"
+									placeholder="Rua"
+									value={street}
+									onChange={(e) => {
+										setStreet(e.target.value);
+									}}
+								/>
 							</Row>
 							<Row>
-								<Input type="text" placeholder="Número" size={15} />
+								<Input
+									type="text"
+									placeholder="Número"
+									size={15}
+									value={number}
+									onChange={(e) => {
+										setNumber(e.target.value);
+									}}
+								/>
 								<ComplementContainer>
 									<ComplementInput
 										type="text"
@@ -109,6 +147,10 @@ export function Checkout() {
 										onFocus={() => setIsVisibleComplementPlaceHolder(false)}
 										onBlur={(e) => {
 											setIsVisibleComplementPlaceHolder(e.target.value === "");
+										}}
+										value={complement}
+										onChange={(e) => {
+											setComplement(e.target.value);
 										}}
 									/>
 
@@ -124,9 +166,32 @@ export function Checkout() {
 								{/* </div> */}
 							</Row>
 							<Row>
-								<Input type="text" placeholder="Bairro" size={20} />
-								<Input type="text" placeholder="Cidade" />
-								<Input type="text" placeholder="UF" size={3.75} />
+								<Input
+									type="text"
+									placeholder="Bairro"
+									size={20}
+									value={neighborhood}
+									onChange={(e) => {
+										setNeighborhood(e.target.value);
+									}}
+								/>
+								<Input
+									type="text"
+									placeholder="Cidade"
+									value={city}
+									onChange={(e) => {
+										setCity(e.target.value);
+									}}
+								/>
+								<Input
+									type="text"
+									placeholder="UF"
+									size={3.75}
+									value={state}
+									onChange={(e) => {
+										setState(e.target.value);
+									}}
+								/>
 							</Row>
 						</CardBox>
 
@@ -150,27 +215,27 @@ export function Checkout() {
 							<PaymentButtons>
 								<Button
 									onClick={() => {
-										setActivePayment(PaymentsType.CREDIT_CARD);
+										setActivePayment("Cartão de crédito");
 									}}
-									active={activePayment === PaymentsType.CREDIT_CARD}
+									active={activePayment === "Cartão de crédito"}
 								>
 									<CreditCard size={16} color={theme.purple} />
 									Cartão de crédito
 								</Button>
 								<Button
 									onClick={() => {
-										setActivePayment(PaymentsType.DEBIT_CARD);
+										setActivePayment("Cartão de débito");
 									}}
-									active={activePayment === PaymentsType.DEBIT_CARD}
+									active={activePayment === "Cartão de débito"}
 								>
 									<Bank size={16} color={theme.purple} />
 									Cartão de débito
 								</Button>
 								<Button
 									onClick={() => {
-										setActivePayment(PaymentsType.CASH);
+										setActivePayment("Dinheiro");
 									}}
-									active={activePayment === PaymentsType.CASH}
+									active={activePayment === "Dinheiro"}
 								>
 									<Money size={16} color={theme.purple} />
 									Dinheiro
@@ -225,7 +290,22 @@ export function Checkout() {
 								</TotalCardRow>
 							</TotalCard>
 							<Link to={"/success"}>
-								<ConfirmButton type="submit">Confirmar pedido</ConfirmButton>
+								<ConfirmButton
+									type="submit"
+									onClick={() => {
+										const adress = {
+											street,
+											number,
+											city,
+											state,
+											zip,
+											neighborhood,
+										};
+										checkout(adress, activePayment);
+									}}
+								>
+									Confirmar pedido
+								</ConfirmButton>
 							</Link>
 						</RightCardBox>
 					</div>

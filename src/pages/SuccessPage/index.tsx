@@ -1,7 +1,9 @@
 import { CurrencyDollarSimple, MapPin, Timer } from "phosphor-react";
+import { useContext } from "react";
 import { useTheme } from "styled-components";
 import { Header } from "../../components/Header";
 import { Row } from "../../components/Row";
+import { CartContext } from "../../contexts/CartContext";
 import {
 	Container,
 	IconRounded,
@@ -15,6 +17,13 @@ import {
 // import SuccessImg from "../../../public/assets/img/Success.png";
 import SuccessImg from "/assets/img/Success.svg";
 
+enum PaymentsType {
+	UNDEFINED = "Sem pagamento",
+	CREDIT_CARD = "Cartão de crédito",
+	DEBIT_CARD = "Cartäo de débito",
+	CASH = "Dinheiro",
+}
+
 interface ColorsTheme {
 	purple: string;
 	yellow: string;
@@ -23,6 +32,7 @@ interface ColorsTheme {
 
 export function SuccessPage() {
 	const theme = useTheme() as ColorsTheme;
+	const { address, paymentType } = useContext(CartContext);
 	return (
 		<>
 			<Header />
@@ -40,12 +50,15 @@ export function SuccessPage() {
 									<MapPin weight="fill" color="#fff" />
 								</IconRounded>
 								<Col gutter={1}>
-									Entrega em <strong> Rua João Daniel Martinelli, 102</strong>
+									Entrega em{" "}
+									<strong>{`${address?.street}, ${address?.number}`}</strong>
 								</Col>
 							</HeaderContainer>
 							<Row size={2}>
 								<Col gutter={4}>
-									<p>Farrapos - Porto Alegre, RS</p>
+									<p>
+										{`${address?.neighborhood} - ${address?.city}, ${address?.state}`}
+									</p>
 								</Col>
 							</Row>
 
@@ -72,7 +85,7 @@ export function SuccessPage() {
 							<Row size={1}>
 								<Col gutter={4}>
 									<p>
-										<strong>Cartão de crédito</strong>
+										<strong>{paymentType}</strong>
 									</p>
 								</Col>
 							</Row>

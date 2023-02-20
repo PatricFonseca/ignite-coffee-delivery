@@ -55,11 +55,19 @@ ButtonSpinEdit.defaultProps = {
 export const ButtonSpinEditLeft = styled(ButtonSpinEdit)`
 	border-top-left-radius: 6px;
 	border-bottom-left-radius: 6px;
+
+	& > span:hover {
+		color: ${(props) => props.theme["purple-dark"]};
+	}
 `;
 
 export const ButtonSpinEditRight = styled(ButtonSpinEdit)`
 	border-top-right-radius: 6px;
 	border-bottom-right-radius: 6px;
+
+	& > span:hover {
+		color: ${(props) => props.theme["purple-dark"]};
+	}
 `;
 
 export const Container = styled.div`
